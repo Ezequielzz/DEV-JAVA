@@ -1,6 +1,11 @@
 package com.br.ezequielzz;
 
-public class Professor extends Pessoa{
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+public class Professor extends Pessoa implements Avaliavel {
     private int salario;
 
     @Override
@@ -10,11 +15,10 @@ public class Professor extends Pessoa{
         System.out.println("Salario: " + getSalario());
     }
 
-    public int getSalario() {
-        return salario;
-    }
+    @Override
+    public void avaliarDesempenho() {
+        int salarioDiario = getSalario() / 22;
 
-    public void setSalario(int salario) {
-        this.salario = salario;
+        System.out.println("Seu salário diário é: " + salarioDiario);
     }
 }
