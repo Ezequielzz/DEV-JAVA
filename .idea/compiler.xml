@@ -10,10 +10,8 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="comercio_eletronico" />
         <module name="exemplo_conteudo_basico" />
-        <module name="exemplo_colecoes" />
-        <module name="file_reader" />
+        <module name="comercio_eletronico" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
