@@ -12,16 +12,20 @@ public class MaterialEletronico extends ItemBiblioteca {
         super(titulo, autor);
     }
 
-
     @Override
     public void emprestar(Usuario usuario) {
-        // Lógica para emprestar revista
-        System.out.println("Material eletrônico emprestado por 7 dias: " + titulo);
-        usuario.adicionarItem(this);
+        if (isDisponivel()) {
+            System.out.println("Material eletrônico '" + titulo + "' emprestado por 7 dias.");
+            usuario.adicionarItem(this);
+            marcarComoEmprestado();
+        } else {
+            System.out.println("Material eletrônico '" + titulo + "' não está disponível.");
+        }
     }
 
     @Override
     public double calcularMulta(int diasAtraso) {
-        return diasAtraso * 5.00; // Multa para material eletrônico
+        return diasAtraso * 5.00; // Exemplo de cálculo de multa para material eletrônico
     }
+
 }

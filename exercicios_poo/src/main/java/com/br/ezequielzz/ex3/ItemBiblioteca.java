@@ -9,26 +9,29 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 public abstract class ItemBiblioteca {
-    private String titulo;
-    private String autor;
-    private boolean disponivel;
+    protected String titulo;
+    protected String autor;
+    private boolean disponivel = true;
 
-    // Método Abstrato
+    public ItemBiblioteca(String titulo, String autor) {
+        this.titulo = titulo;
+        this.autor = autor;
+    }
+
+    // Método abstrato para emprestar
     public abstract void emprestar(Usuario usuario);
 
-    // Método para calcular multa por atraso (será sobrescrito pois depende do tipo de item)
+    // Método para calcular multa por atraso (pode ser sobrescrito)
     public abstract double calcularMulta(int diasAtraso);
 
-    // Método para devolver item
-    public void devolver(Usuario usuario) {
-        if (!disponivel) {
-            this.disponivel = true;
-            usuario.devolverItem(this);
-            System.out.println("Item '" + titulo + "' devolvido.");
-        } else {
-            System.out.println("Erro: Item '" + titulo + "' já está disponível.");
-        }
+    // Marca o item como emprestado
+    public void marcarComoEmprestado() {
+        this.disponivel = false;
+    }
+
+    // Marca o item como disponível
+    public void marcarComoDisponivel() {
+        this.disponivel = true;
     }
 }

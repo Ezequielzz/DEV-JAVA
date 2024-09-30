@@ -7,21 +7,17 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Livro extends ItemBiblioteca implements Reservavel{
-    private final int diasEmprestimo = 14;
-
-    public Livro(String titulo, String autor, boolean disponivel) {
-        super(titulo, autor, disponivel);
+public class Livro extends ItemBiblioteca implements Reservavel {
+    public Livro(String titulo, String autor) {
+        super(titulo, autor);
     }
 
     @Override
     public void emprestar(Usuario usuario) {
-        if (disponivel) {
-            this.disponivel = false;
-            this.dataEmprestimo = LocalDate.now();
-            this.dataDevolucao = dataEmprestimo.plusDays(DIAS_EMPRESTIMO); // Data de devolução
-            usuario.adicionarItem(this);
+        if (isDisponivel()) {
             System.out.println("Livro '" + titulo + "' emprestado por 14 dias.");
+            usuario.adicionarItem(this);
+            marcarComoEmprestado();
         } else {
             System.out.println("Livro '" + titulo + "' não está disponível.");
         }
@@ -29,12 +25,15 @@ public class Livro extends ItemBiblioteca implements Reservavel{
 
     @Override
     public double calcularMulta(int diasAtraso) {
-        return diasAtraso * 1.50;
+        return diasAtraso * 1.50; // Exemplo de cálculo de multa para livro
     }
 
     @Override
     public void reservar() {
-        // Lógica para reservar o livro
-        System.out.println("Livro Reservado " + titulo);
+        if (isDisponivel()) {
+            System.out.println("Livro '" + titulo + "' reservado.");
+        } else {
+            System.out.println("Livro '" + titulo + "' não pode ser reservado, pois já está emprestado.");
+        }
     }
 }

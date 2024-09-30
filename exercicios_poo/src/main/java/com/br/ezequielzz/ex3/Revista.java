@@ -14,12 +14,17 @@ public class Revista extends ItemBiblioteca {
 
     @Override
     public void emprestar(Usuario usuario) {
-        System.out.println("Revista emprestada por 7 dias: " + titulo);
-        usuario.adicionarItem(this);
+        if (isDisponivel()) {
+            System.out.println("Revista '" + titulo + "' emprestada por 7 dias.");
+            usuario.adicionarItem(this);
+            marcarComoEmprestado();
+        } else {
+            System.out.println("Revista '" + titulo + "' não está disponível.");
+        }
     }
 
     @Override
     public double calcularMulta(int diasAtraso) {
-        return diasAtraso * 2.00; // Multa maior para revistas
+        return diasAtraso * 2.00; // Exemplo de cálculo de multa para revista
     }
 }

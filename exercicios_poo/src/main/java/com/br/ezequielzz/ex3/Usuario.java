@@ -17,16 +17,23 @@ public class Usuario {
     private String cpf;
     private List<ItemBiblioteca> itensEmprestados;
 
-    public void adicionarItem(ItemBiblioteca item){
+    public Usuario(String nome, String cpf) {
+        this.nome = nome;
+        this.cpf = cpf;
+        this.itensEmprestados = new ArrayList<>();
+    }
+
+    public void adicionarItem(ItemBiblioteca item) {
         itensEmprestados.add(item);
     }
 
-    public void devolverItem(ItemBiblioteca item){
+    public void devolverItem(ItemBiblioteca item) {
         itensEmprestados.remove(item);
+        item.marcarComoDisponivel();
         System.out.println("Item devolvido: " + item.getTitulo());
     }
 
-    public List<ItemBiblioteca> getItensEmprestados(){
+    public List<ItemBiblioteca> getItensEmprestados() {
         return itensEmprestados;
     }
 }
